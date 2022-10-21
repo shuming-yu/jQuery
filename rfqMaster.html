@@ -123,7 +123,7 @@
       // $(this).prop('disabled', true);
       // initmesLogTable();
     });
-
+    
     
     $("#mesTable").on( "click", "tbody tr", function() {  // tbody tr 要選擇的元素
       let tr = $(this);
@@ -142,12 +142,12 @@
       rfqId = $("#mesTable").DataTable().row(rowIndex-1).data().RFQ_MASTER_ID;
       // console.log(rfqId);
       initmesLogTable();
-
+      
       // 取出出點選 id 值 - DOM
       // var id = $(this)[0].firstChild.innerHTML;
+      queryChecked();
     });
 
-    queryChecked();
   });
 
   
@@ -190,14 +190,13 @@ function dateFormat(data, type, row, meta) {
       // console.log(data);
       return moment(data).format(datePattern);
   }
-
   return data;
 }
 
 function queryChecked(){
   var queryArr = $.map($("#mesTable tbody input[type='checkbox']:checked"), function(checked){
-    console.log(checked);
-    return checked
+    var tr = $(checked).parents("tr");
+    return mesTable.row(tr).data();
   })
   console.log(queryArr);
 }

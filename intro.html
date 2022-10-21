@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <!-- bootstrap4 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <!-- datatable.js -->
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <!-- jquery-ui -->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+  <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet" />
+  <!-- moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<style>
+  .class1{background-color:red;}
+  .class2{background-color:blue;}
+  .class3{background-color:orange;}
+  .class4{background-color:purple;}
+</style>
+<body>
+  <div id="reference">
+    參考 :
+    <ul>
+      <li><a href="https://ithelp.ithome.com.tw/articles/10092598">jQuery – 基本使用語法</a></li>
+      <li><a href="https://ithelp.ithome.com.tw/articles/10095237">jQuery – 選擇器 (selector)</a></li>
+      <li><a href="https://www.cythilya.tw/2017/09/10/jquery-attr-vs-prop/">jQuery .attr() vs .prop()</a></li>
+      <li><a href="https://www.796t.com/content/1546573700.html">jQuery操作複選框checkbox技巧總結</a></li>
+
+    </ul>
+  </div>
+  <hr>
+
+  <!-- 階層選擇器 -->
+  <input type="Button" id="btn1" name="btn1" value="改變div1中的p">
+  <input type="Button" id="btn2" name="btn2" value="改變整個div1">
+  <input type="Button" id="btn3" name="btn3" value="改變div1後第1個p">
+  <input type="Button" id="btn4" name="btn4" value="改變div1後所有p">
+  <input type="Button" id="btn5" name="btn5" value="移除所有效果">
+  
+  <div id="div1">
+    <span>我是div1-1</span>
+    <span>我是div1-2</span>
+    <input type="Button" id="btn6" class="btn6" name="btn6" value="我是btn6">
+    <div class="div2">
+      <span>我是div2-3</span>
+      <span>我是div2-4</span>
+      <input type="Button" id="testbtn" class="testbtn" name="testbtn" value="我是btn7">
+      <input type="Button" id="btn7" class="btn7" name="btn7" value="我是btn7">
+    </div>
+    div1
+    <p>div1 裡面的 p</p>
+  </div>
+  
+  <p>div1後第1個P</p>
+  <p>div1後第2個P</p>
+
+</body>
+</html>
+
+<script>
+  // 階層選擇器
+  // 改變div1中的p  物件中的某一種物件(空白)
+  $('#btn1').click(function() {
+      $('#div1 p').addClass('class1');
+  });
+
+  // 改變整個div1  物件中的所有物件(*)
+  $('#btn2').click(function() {
+      $('#div1 *').removeClass();
+      $('#div1').addClass('class2');
+  });
+
+  // 改變div1後第1個p  之後符合條件的第一個(+)
+  $('#btn3').click(function() {
+      $('#div1 + p').addClass('class3');
+  });
+
+  // 改變div1後所有p  之後符合的所有(~)
+  $('#btn4').click(function() {
+      $('#div1 ~ p').addClass('class4');
+  });
+
+  // 移除所有效果
+  $('#btn5').click(function() {
+      $('*').removeClass('class1 class2 class3 class4');
+      // $('*').removeClass('class2');
+      // $('*').removeClass('class3');
+      // $('*').removeClass('class4');
+  });
+
+
+  // 子元素選擇器
+  // $("ul li:nth-child(2)"); //第 2 個節點
+  // $("ul li:nth-child(odd)"); //所有奇數子節點
+  // $("ul li:nth-child(even)"); //所有偶數子節點
+  // $("ul li:nth-child(3n + 1)"); //1, 4, 7 … 個節點
+  // $("div span:first-child") //所有的div元素的第一個子節點
+  // $("div span:last-child") //所有的div元素的最後一個節點
+  // $("div button:only-child") //所有只有一個 button 子節點的 div​​​​​​​​​​​​​​​​​​
+
+
+  // 屬性過濾選擇器
+  // $("div[id]"); //選擇所有含有id屬性的div元素
+  // $("input[name='btn3']"); //選擇所有的name屬性等於’Jack’的input元素
+  // $("input[name!='btn3']"); //選擇所有的name屬性不等於’Jack’的input元素
+  // $("input[name^='b']"); //選擇所有的name屬性以'b'開頭的input元素
+  // $("input[name$='4']"); //選擇所有的name屬性以'4'結尾的input元素
+  // $("input[name*='tn']"); //選擇所有的name屬性包含'tn'的input元素
+  // $("input[id][name$='man']"); //可以使用多個屬性進行聯合選擇，該選擇器是得到所有的含有id屬性並且那麼屬性以man結尾的元素​​​​​​​​​​​​​​​​​​​​​​​​​​
+
+  
+
+</script>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.3/jquery.csv.min.js"></script>
+    <!-- bootstrap4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <!-- datatable.js -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- jquery-ui -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <link href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet" />
+    <!-- moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<style>
+  #mesTable tr:hover {
+    background-color:aqua;
+    cursor: pointer;
+  }
+  #mesLogTable tr:hover {
+    background-color: #5e72e4;
+  }
+</style>
+<body>
+    <div class="d-flex flex-wrap">
+      <div class="col-12">
+        <button id="btnGetcsv" class="btn btn-primary">Get csv</button>
+      </div>
+    </div>
+    
+    <div class="d-flex flex-wrap">
+      <div class="col-6">
+        <table id="mesTable"></table>
+      </div>
+      <div class="col-6">
+        <table id="mesLogTable"></table>
+      </div>
+    </div>
+</body>
+<script>
+  const datePattern = "YYYY-MM-DD";
+  let csvRFQ = "RFQMaster.csv";
+  let csvRFQLog = "RFQMasterLog.csv";
+  let csvRFQData = [];
+  let csvRFQLogData = [];
+  let mesTable;
+  let mesLogTable;
+  let rowIndex;
+  let rfqId;
+
+  let mesTableSetting = {
+    columns : [
+      { title: "checkbox", data: "RFQ_MASTER_ID", orderable: false }, //checkbox
+      { title: "RFQ_MASTER_ID", data: "RFQ_MASTER_ID", visible: false },
+      { title: "Product&nbsp;Family", data: "PRODUCT_FAMILY" },
+      { title: "Receive&nbsp;Date", data: "RECEIVE_DATE" }, // render: dateFormat
+      { title: "Est&nbsp;Prod&nbsp;Revenue", data: "EST_PROD_REVENUE" },
+      { title: "Est&nbsp;Sales&nbsp;Qty", data: "EST_SALES_QTY" },
+      { title: "Est&nbsp;Prod&nbsp;Cost", data: "EST_PROD_COST" },
+      { title: "DB&nbsp;Date", data: "DB_DATE", render: dateFormat },
+      { title: "SI&nbsp;Date", data: "SI_DATE", render: dateFormat },
+      { title: "PV&nbsp;Date", data: "PV_DATE", render: dateFormat },
+      { title: "RTM&nbsp;Date", data: "RTM_DATE", render: dateFormat },
+      { title: "FCS&nbsp;Date", data: "FCS_DATE", render: dateFormat },
+      { title: "Life&nbsp;Cycle", data: "LIFE_CYCLE" },
+      { title: "End&nbsp;Date", data: "END_DATE", render: dateFormat },
+      { title: "RFQ&nbsp;Status", data: "RFQ_STATUS" },
+      { title: "Lost&nbsp;Reason&nbsp;Code", data: "LOST_REASON_CODE" },
+      { title: "Lost&nbsp;Reason&nbsp;Desc", data: "LOST_REASON_DESC" },
+      { title: "Editor", data: "EDITOR" },
+      { title: "Cdt", data: "CDT" },
+      { title: "Udt", data: "UDT" },
+    ],
+    scrollX: 255,
+    scrollY: 400,
+    createdRow( row, data, dataIndex, cells ){
+      var tr = $(row);
+      var _checkbox = $("<input type='checkbox' />");
+      tr.find("td:first").html(_checkbox);
+    }
+  };
+
+  let mesLogTableSetting = {
+    columns : [
+      { title: "RFQ_MASTER_ID", data: "RFQ_MASTER_ID", visible: false },
+      { title: "Action&nbsp;Name", data: "ACTION_NAME" },
+      { title: "Receive&nbsp;Date", data: "RECEIVE_DATE", render: dateFormat },
+      { title: "Product&nbsp;Family", data: "PRODUCT_FAMILY" },
+      { title: "Old&nbsp;Product&nbsp;Family", data: "OLD_PRODUCT_FAMILY" },
+      { title: "Est&nbsp;Prod&nbsp;Revenue", data: "EST_PROD_REVENUE" },
+      { title: "Est&nbsp;Sales&nbsp;Qty", data: "EST_SALES_QTY" },
+      { title: "Est&nbsp;Prod&nbsp;Cost", data: "EST_PROD_COST" },
+      { title: "DB&nbsp;Date", data: "DB_DATE", render: dateFormat },
+      { title: "SI&nbsp;Date", data: "SI_DATE", render: dateFormat },
+      { title: "PV&nbsp;Date", data: "PV_DATE", render: dateFormat },
+      { title: "RTM&nbsp;Date", data: "RTM_DATE", render: dateFormat },
+      { title: "FCS&nbsp;Date", data: "FCS_DATE", render: dateFormat },
+      { title: "Life&nbsp;Cycle", data: "LIFE_CYCLE" },
+      { title: "End&nbsp;Date", data: "END_DATE", render: dateFormat },
+      { title: "Receive&nbsp;Date", data: "RFQ_STATUS" },
+      { title: "Lost&nbsp;Reason&nbsp;Code", data: "LOST_REASON_CODE" },
+      { title: "Lost&nbsp;Reason&nbsp;Desc", data: "LOST_REASON_DESC" },
+      { title: "Editor", data: "EDITOR" },
+      { title: "Cdt", data: "CDT" },
+    ],
+    scrollX: 255,
+    scrollY: 400,
+  }
+  
+  $(document).ready(function(){
+
+    $("#btnGetcsv").click(function(){
+      initmesTable();
+      // $(this).prop('disabled', true);
+      // initmesLogTable();
+    });
+
+    
+    $("#mesTable").on( "click", "tbody tr", function() {  // tbody tr 要選擇的元素
+      let tr = $(this);
+      if(tr.hasClass("selected")){
+        tr.removeClass("selected");
+      }else{
+        $("#mesTable tbody").find("tr.selected").removeClass("selected");
+        tr.addClass("selected");
+      };
+      
+      let row = mesTable.row(tr).data();
+      // console.log(row);
+      // 取出出點選 id 值
+      rowIndex = $("#mesTable tr").index(tr.closest("tr"));
+      // console.log(rowIndex);
+      rfqId = $("#mesTable").DataTable().row(rowIndex-1).data().RFQ_MASTER_ID;
+      // console.log(rfqId);
+      initmesLogTable();
+
+      // 取出出點選 id 值 - DOM
+      // var id = $(this)[0].firstChild.innerHTML;
+    });
+
+    queryChecked();
+  });
+
+  
+  function initmesTable(){
+    if(!mesTable){
+      // mesTable.destroy();
+      // $("#mesTable").empty();
+      mesTable = $("#mesTable").DataTable(mesTableSetting);
+
+      var _checkboxAll = $("<input type='checkbox' />");
+      $(mesTable.table().header()).find("th:first").html(_checkboxAll);
+      _checkboxAll.on('click', function(){
+        var isChecked = $(this).prop("checked");
+        // console.log(isChecked);
+        $("#mesTable tbody").find("input[type='checkbox']").prop("checked", isChecked);
+      })
+    }
+    // mesTable.clear();
+    mesTable.clear().rows.add(csvRFQData).draw();
+  }
+
+  
+
+  // 使用 id 篩選相對應 RFQ_MASTER_ID
+  function initmesLogTable(){
+  if(!mesLogTable){
+    // mesLogTable.destroy();
+    // $("#mesLogTable").empty();
+    mesLogTable = $("#mesLogTable").DataTable(mesLogTableSetting);
+  }
+  let csvRFQLogGreq = $.grep(csvRFQLogData, function(item, i){
+    return item.RFQ_MASTER_ID == rfqId;
+  })
+  // console.log(csvRFQLogGreq);
+  mesLogTable.clear().rows.add(csvRFQLogGreq).draw();
+}
+
+function dateFormat(data, type, row, meta) {
+  if (data) {
+      // console.log(data);
+      return moment(data).format(datePattern);
+  }
+
+  return data;
+}
+
+function queryChecked(){
+  var queryArr = $.map($("#mesTable tbody input[type='checkbox']:checked"), function(checked){
+    console.log(checked);
+    return checked
+  })
+  console.log(queryArr);
+}
+
+</script>
+<script src="./mes.js"></script>
+
+</html>
+

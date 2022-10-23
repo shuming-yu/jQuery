@@ -53,7 +53,7 @@
     <div class="div2">
       <span>我是div2-3</span>
       <span>我是div2-4</span>
-      <input type="Button" id="testbtn" class="testbtn" name="testbtn" value="我是btn7">
+      <input type="Button" id="testbtn" class="testbtn" name="testbtn" value="我是testbtn7">
       <input type="Button" id="btn7" class="btn7" name="btn7" value="我是btn7">
     </div>
     div1
@@ -117,6 +117,17 @@
   // $("input[name*='tn']"); //選擇所有的name屬性包含'tn'的input元素
   // $("input[id][name$='man']"); //可以使用多個屬性進行聯合選擇，該選擇器是得到所有的含有id屬性並且那麼屬性以man結尾的元素​​​​​​​​​​​​​​​​​​​​​​​​​​
 
-  
 
+  // jQuery 自訂選擇器(Custom Selectors)
+  // :even：找出結果集中其偶數的 elements (2,4,6,8…)
+  // : odd： 找出結果集為奇數(單數)的 elements (1,3,5,7…)
+  // :eq(N), :nth(N)：找出選擇結果集 index 為 N 的 elements
+  // :gt(N)：找出結果集中索引大於 N 的 elements
+  // :lt(N)：找出結果集中索引小於 N 的 elements
+  // :first：找出結果集中的第一個 element (相當於 eq(0) 或者 nth(0))
+  // :last：選擇結果集中的最後一個 element
+  // :parent：在結果集中選擇 elements，它必須具有子 elements(包括文本節點)(跟 :empty 相反)
+  // :contains(‘test’)：選擇結果集中包含有指定文本的 elements
+  // :has(selector)：找出結果集中至少出現一次某 selector 的元素
+  // :not(selector)：反選取指定的 selector
 </script>

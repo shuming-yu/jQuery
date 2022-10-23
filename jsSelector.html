@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="reference">
+    參考 :
+    <ul>
+      <li><a href="https://ithelp.ithome.com.tw/articles/10230686">JavaScript – 選擇器 (selector)</a></li>
+      <li><a href="https://ithelp.ithome.com.tw/articles/10092598">jQuery – 基本使用語法</a></li>
+      <li><a href="https://ithelp.ithome.com.tw/articles/10095237">jQuery – 選擇器 (selector)</a></li>
+      <li><a href="https://www.cythilya.tw/2017/09/10/jquery-attr-vs-prop/">jQuery .attr() vs .prop()</a></li>
+      <li><a href="https://www.796t.com/content/1546573700.html">jQuery操作複選框checkbox技巧總結</a></li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <ul>
+    <h3>querySelector 是屬於 靜態結果, 而 getElementBy... 是屬於 動態結果</h3>
+
+    <li>getElementById: 根據傳入的Id來對應到指定的元素</li>
+    <li>getElementsByClassName: 根據傳入的ClassName來對應到指定的元素</li>
+    <li>getElementsByName: 根據傳入的Name來對應到指定的元素</li>
+    <li>getElementsByTagName: 根據傳入的TagName來對應到指定的元素</li>
+    <li>querySelector: 根據傳入的 值 來對應到指定的元素</li>
+    <li>querySelectorAll: 根據傳入的 值 來對應到指定的元素</li>
+  </ul>
+
+  <hr>
+
+  <ul id="myul">
+    <li>li 1</li>
+    <li>li 2</li>
+    <li>li 3</li>
+  </ul>
+
+  <hr>
+
+  <!-- qeurySelector() / querySelectorAll() 比較 -->
+  <h2 class="title"><em>1</em></h2>
+  <h2 class="title"><em>2</em></h2>
+  <h2 class="title"><em>3</em></h2>
+  <h2 class="title"><em>4</em></h2>
+</body>
+</html>
+
+<script>
+  // 使用getElementBy系列取得li清單
+  var ulbyid = document.getElementById('myul');
+  var libytag = ulbyid.getElementsByTagName('li');
+
+  // 使用querySelector取得li清單
+  var ulqs = document.querySelector('ul');
+  var ulqsa = ulqs.querySelectorAll('li');
+
+  // 輸出取得的清單長度都是3
+  console.log("libytag.length:", libytag.length); // 3
+  console.log("ulqsa.length:", ulqsa.length); // 3
+
+  // 在 ulbyid 加入新的 li 元素
+  ulbyid.appendChild(document.createElement('li'));
+
+  // 再次輸出清單長度
+  console.log("libytag.length:", libytag.length); // 4
+  console.log("ulqsa.length:", ulqsa.length); // 3
+
+
+
+  // 在 ulqsa 加入新的 li 元素
+  ulqs.appendChild(document.createElement('li'));
+
+  // 再次輸出清單長度
+  console.log("libytag.length:", libytag.length); // 5
+  console.log("ulqsa.length:", ulqsa.length); // 3
+
+
+
+
+  // .qeurySelector() 只會針對元素的第一筆資料，其他並不會被選入
+  document.querySelector('.title').textContent = 123;
+  // document.querySelectorAll('.title').textContent = 123;
+
+  
+</script>

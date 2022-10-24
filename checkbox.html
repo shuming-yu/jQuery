@@ -26,9 +26,10 @@
     <ul>
       <li><a href="https://ithelp.ithome.com.tw/articles/10092598">jQuery – 基本使用語法</a></li>
       <li><a href="https://ithelp.ithome.com.tw/articles/10095237">jQuery – 選擇器 (selector)</a></li>
+      <li><a href="https://powerkaifu.github.io/2020/10/09/lesson-jq-06.traversing/">jQuery – 選擇器與遍歷</a></li>
       <li><a href="https://www.cythilya.tw/2017/09/10/jquery-attr-vs-prop/">jQuery .attr() vs .prop()</a></li>
       <li><a href="https://www.796t.com/content/1546573700.html">jQuery操作複選框checkbox技巧總結</a></li>
-
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child">:nth-child</a></li>
     </ul>
   </div>
   <hr>
@@ -42,7 +43,9 @@
   <br>
   <label for="checkbox-3">checkbox-3</label>
   <input type="checkbox" class="checkbox-3" checked="false" />
-
+  <br>
+  <label for="checkbox-4">checkbox-4</label>
+  <input type="checkbox" class="checkbox-4" checked />
 </body>
 </html>
 
@@ -62,6 +65,7 @@
   click('.checkbox-1');
   click('.checkbox-2');
   click('.checkbox-3');
+  click('.checkbox-4');
   
   // checkbox-1
   // console.log($('.checkbox-1').prop('checked')); //false

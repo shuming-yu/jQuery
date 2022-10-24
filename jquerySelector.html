@@ -32,9 +32,10 @@
     <ul>
       <li><a href="https://ithelp.ithome.com.tw/articles/10092598">jQuery – 基本使用語法</a></li>
       <li><a href="https://ithelp.ithome.com.tw/articles/10095237">jQuery – 選擇器 (selector)</a></li>
+      <li><a href="https://powerkaifu.github.io/2020/10/09/lesson-jq-06.traversing/">jQuery – 選擇器與遍歷</a></li>
       <li><a href="https://www.cythilya.tw/2017/09/10/jquery-attr-vs-prop/">jQuery .attr() vs .prop()</a></li>
       <li><a href="https://www.796t.com/content/1546573700.html">jQuery操作複選框checkbox技巧總結</a></li>
-
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child">:nth-child</a></li>
     </ul>
   </div>
   <hr>
@@ -46,16 +47,22 @@
   <input type="Button" id="btn4" name="btn4" value="改變div1後所有p">
   <input type="Button" id="btn5" name="btn5" value="移除所有效果">
   
+  <div class="hello">
+    Hello!
+  </div>
+
   <div id="div1">
     <span>我是div1-1</span>
     <span>我是div1-2</span>
     <input type="Button" id="btn6" class="btn6" name="btn6" value="我是btn6">
+
     <div class="div2">
       <span>我是div2-3</span>
       <span>我是div2-4</span>
       <input type="Button" id="testbtn" class="testbtn" name="testbtn" value="我是testbtn7">
       <input type="Button" id="btn7" class="btn7" name="btn7" value="我是btn7">
     </div>
+
     div1
     <p>div1 裡面的 p</p>
   </div>
@@ -79,12 +86,12 @@
       $('#div1').addClass('class2');
   });
 
-  // 改變div1後第1個p  之後符合條件的第一個(+)
+  // 改變div1後第1個p  之後符合條件的第一個(+) (兄弟或相鄰選擇器)
   $('#btn3').click(function() {
       $('#div1 + p').addClass('class3');
   });
 
-  // 改變div1後所有p  之後符合的所有(~)
+  // 改變div1後所有p  之後符合的所有(~) (同層全體選擇器)
   $('#btn4').click(function() {
       $('#div1 ~ p').addClass('class4');
   });

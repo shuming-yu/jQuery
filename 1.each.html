@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<style>
+  .example {
+    font-style: italic;
+  }
+</style>
+<body>
+  <h2>jQuery.each() & .each()</h2>
+
+  <input type="button" id="Btn_Each" value="each" />
+  <!-- <input type="button" id="Btn_Grep" value="grep" />
+  <input type="button" id="Btn_Map" value="map" />
+  <input type="button" id="Btn_Merge" value="merge" />
+  <input type="button" id="Btn_Unique" value="unique" /> -->
+  <br />
+  
+  <div id="one"></div>
+  <div id="two"></div>
+  <div id="three"></div>
+  <div id="four"></div>
+  <div id="five"></div>
+
+  <br>
+  <fieldset>
+    <legend>output</legend>
+    <div id="msg"></div>
+  </fieldset>
+  <br>
+
+  To do list: <span>(click here to change)</span>
+  <ul>
+    <li>Eat</li>
+    <li>Sleep</li>
+    <li>Be merry</li>
+  </ul>
+
+</body>
+</html>
+
+<script>
+  let arrStr = [ "one", "two", "three", "four", "five" ];
+  let arrNum = [1, 2, 3, 4, 5];
+  let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+
+  $(function(){
+
+    // $.each()
+    $("#Btn_Each").click(function () {
+
+        // 1.
+        // 賦予值方式會回傳 arr 陣列
+        let arrEmpty = $.each(arrNum, function (index, val) {
+
+        });
+        // console.log("arrEmpty:", arrEmpty);
+
+        
+        // 2. 陣列 arrNum
+        let eachArrNum = $.each(arrNum, function (index, val) {
+            $("#msg").append("index:" + index + ", val:" + val + "<br/>");
+            // console.log(index + ":" + val);
+        });
+        // console.log("eachArrNum:", eachArrNum);
+
+
+        // 3. 陣列 arrStr - return
+        let eachArrStr = $.each(arrStr, function (index, val) {
+          $( "#" + val ).text( "Mine is " + val + "." );
+
+          // Will stop running after "three"
+          return ( val !== "three" );
+        });
+        // console.log("eachArrStr:", eachArrStr);
+
+
+        // 4. 物件
+        let eachObj = $.each(obj, function (key, val) {
+            $("#msg").append("key:" + key + ", value:" + val + "<br/>");
+            // console.log(key + ":" + val);
+        });
+        // console.log("eachObj:", eachObj);
+
+    });
+
+
+
+    // .each() - 元素
+    $("span").click(function(){
+      $("li").each(function(index, item){
+        // console.log(index, item);
+        // console.log(this);
+
+        // $(item).toggleClass("example");
+        $(this).toggleClass("example");
+      })
+    })
+
+  })
+
+
+
+</script>

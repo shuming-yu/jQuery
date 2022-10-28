@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h2>jQuery.map() & .map()</h2>
+  <ul>
+    <li>透過函式內所回傳的值組合成回傳一個陣列</li>
+    <li>若輸出陣列想略過特定元素，就return null或undefined</li>
+  </ul>
+
+  <input type="button" id="Btn_Map" value="map" />
+  <br />
+
+  <fieldset>
+    <legend>output</legend>
+    <div id="msg"></div>
+  </fieldset>
+  <br>
+
+</body>
+</html>
+
+<script>
+
+  $(function(){
+    let arrStr = [ "one", "two", "three", "four", "five" ];
+    let arrNum = [1, 2, 3, 4, 5];
+    let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+    
+    // $.map()
+    $("#Btn_Map").click(function () {
+
+        // 1.
+        // 若未 return, 也會回傳空陣列 []
+        let mapEmpty = $.map(arrNum, function(val, index){
+          // return
+        });
+        console.log("mapEmpty:", mapEmpty);
+
+
+        // 2. 陣列 return true || false
+        let mapTrue = $.map(arrNum, function(val, index){
+          // return val >= 3;
+          
+          if(val >= 3){
+            return val;
+          }else{
+            return false
+          }
+        });
+        // console.log("mapTrue:", mapTrue);
+
+
+        // 3. 物件
+        let mapObj = $.map(obj, function(val, key){
+          // console.log(key);
+          return val * 2;
+        })
+        // console.log("mapObj:", mapObj);
+
+        
+        var arr2 = $.map(arrNum, function (val, index) {
+            return val * 2;
+        });
+
+        $("#msg").html("A: " + arrNum.join(", ") + "<br/>");
+        $("#msg").append("B: " + arr2.join(", ") + "<br/>");
+    });
+
+
+
+    // .map()
+
+
+  })
+
+
+</script>

@@ -29,16 +29,18 @@
       <li><a href="https://powerkaifu.github.io/2020/10/09/lesson-jq-06.traversing/">jQuery – 選擇器與遍歷</a></li>
       <li><a href="https://www.cythilya.tw/2017/09/10/jquery-attr-vs-prop/">jQuery .attr() vs .prop()</a></li>
       <li><a href="https://www.796t.com/content/1546573700.html">jQuery操作複選框checkbox技巧總結</a></li>
-      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child">:nth-child</a></li>
       <li><a href="https://kknews.cc/news/8zgyb2q.html">jQuery中的 attr() 和 prop() 的區別，以及底層探討</a></li>
       <li><a href="https://www.w3school.com.cn/tags/index.asp">HTML 標籤參考手冊</a></li>
     </ul>
   </div>
   <hr>
+  <h2>.attr() & .prop()</h2>
+  <div>1. attr 我會認為是一開始 HTML 渲染出來的狀態</div>
+  <div>2. prop 則是當下 DOM 的狀態</div>
+  <div>3. 兩者是不同步的，所以盡量不要混用，免得出現不對等的 Bug</div>
+  <div>4. checked & selected & disabled 屬性請使用 .prop() 操作</div>
+  <div>5. .attr() 等同於 $0.getAttribute & $0.setAttribute</div>
   
-  <div>兩者是不同步的，所以盡量不要混用，免得出現不對等的 Bug</div>
-  <div>attr 我會認為是一開始 HTML 渲染出來的狀態</div>
-  <div>prop 則是當下 DOM 的狀態</div>
 
   <!-- checkbox -->
   <label for="checkbox-1">checkbox-1</label>
@@ -47,17 +49,14 @@
   <label for="checkbox-2">checkbox-2</label>
   <input type="checkbox" class="checkbox-2" checked="checked" />
   <br>
-  <label for="checkbox-3">checkbox-3</label>
-  <input type="checkbox" class="checkbox-3" checked=false />
-  <br>
 
   <!-- 在html上的自定義屬性 test -->
-  <label for="checkbox-4">checkbox-4</label>
-  <input type="checkbox" class="checkbox-4" test="test1" checked />
+  <label for="checkbox-3">checkbox-3</label>
+  <input type="checkbox" class="checkbox-3" test="test1" checked />
   <!-- $(".checkbox-4").removeAttr("checked") -->
   <br>
-  <label for="checkbox-5">checkbox-5</label>
-  <input type="checkbox" class="checkbox-5" checked />
+  <label for="checkbox-4">checkbox-4</label>
+  <input type="checkbox" class="checkbox-4" checked />
   <br>
   <input type='text' class='username' name='username'>
 

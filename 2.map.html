@@ -23,6 +23,14 @@
     <div id="msg"></div>
   </fieldset>
   <br>
+  <hr>
+
+  <form id="form">
+    <p><b>Values: </b></p>
+    <input type="text" name="name" value="Benjamin">
+    <input type="text" name="password" value="password">
+    <input type="text" name="url" value="https://benjamin.com/">
+  </form>
 
 </body>
 </html>
@@ -80,7 +88,7 @@ let person = {
         // 1.
         // 若未 return, 也會回傳空陣列 []
         let mapEmpty = $.map(arrNum, function(val, index){
-          // return
+          // return 
         });
         console.log("mapEmpty:", mapEmpty);
 
@@ -117,7 +125,11 @@ let person = {
 
 
     // .map()
-
+    $("#form p").append( $("input").map(function() {
+      return $(this).val();
+    })
+    .get()
+    .join( ", " ) );
 
   })
 

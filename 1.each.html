@@ -47,9 +47,49 @@
 </html>
 
 <script>
-  let arrStr = [ "one", "two", "three", "four", "five" ];
-  let arrNum = [1, 2, 3, 4, 5];
-  let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+let data = [
+  {
+      name: "Ben充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tommy充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tiffany充電站",
+      Charge: "投幣式",
+      money: 15,
+  },
+  {
+      name: "Ted充電站",
+      Charge: "免費",
+      money: 1,
+  },
+  {
+      name: "Sharon充電站",
+      Charge: "投幣式",
+      money: 50,
+  },
+];
+let arrStr = [ "one", "two", "three", "four", "five" ];
+let arrNum = [1, 2, 3, 4, 5];
+let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+let person = {
+  name : ['Bob', 'Smith'],
+  age : 32,
+  gender : 'male',
+  interests : ['music', 'skiing'],
+  bio : function() {
+      alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  },
+  greeting: function() {
+      alert('Hi! I\'m ' + this.name[0] + '.');
+  }
+};
+
 
   $(function(){
 
@@ -61,7 +101,7 @@
         let arrEmpty = $.each(arrNum, function (index, val) {
 
         });
-        // console.log("arrEmpty:", arrEmpty);
+        console.log("arrEmpty:", arrEmpty);
 
         
         // 2. 陣列 arrNum

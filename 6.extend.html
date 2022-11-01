@@ -6,32 +6,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>=
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 <body>
   <h2><a href="https://api.jquery.com/jQuery.extend/">jQuery.extend()</a></h2>
   <ul>
-    <!-- <li>功能： 經指定的函式運算後，由原陣列中通過該函式檢驗的元素回傳一個新陣列。</li>
-    <li>改變： 不會直接改變原陣列。</li>
-    <li>語法： var newArray = jQuery.grep( array, function [, invert ] )。</li>
-    <li>回傳值： [] 空陣列。</li>
-    <li>參數： array 與 callback 函式與 invert ( Type: Boolean, 預設為 false, 第三參數可忽略 )</li> -->
+    <li>功能： 可以合併兩個或更多個物件的內容到第一個 target 參數的物件之中。</li>
+    <li>改變： 改變第一個參數的物件。</li>
+    <li>語法： jQuery.extend( target, object1 [, objectN ] )。</li>
+    <li>語法： jQuery.extend( [deep ], target, object1 [, objectN ] )。</li>
+    <li>語法： jQuery.extend( object )。</li>
+    <li>回傳值： Object。</li>
   </ul>
+
+  <div id="log1"></div>
+  <div id="log2"></div>
+  <div id="log3"></div>
+
 
   <h2><a href="https://api.jquery.com/jQuery.fn.extend/">jQuery.fn.extend()</a></h2>
   <ul>
-    
+    <li>功能： 將一個物件的內容合併到 jQuery prototype 上面，以在 jQuery 實例上提供新的方法。</li>
+    <li>語法： jQuery.fn.extend( object )。</li>
   </ul>
 
-<label><input type="checkbox" name="foo"> Foo</label>
-<label><input type="checkbox" name="bar"> Bar</label>
+  <label><input type="checkbox" name="foo"> Foo</label>
+  <label><input type="checkbox" name="bar"> Bar</label>
 </body>
 </html>
 
 <script>
 
   $(function(){
-    // jQuery() & $.fn
+
+    // jQuery().extend()
+    var object1 = {
+      apple: 0,
+      banana: { weight: 52, price: 100 },
+      cherry: 97
+    };
+    var object2 = {
+      banana: { price: 200 },
+      durian: 100
+    };
+    var object3 = {
+      apple: 0,
+      banana: { weight: 52, price: 100 },
+      cherry: 97
+    };
+    var object4 = {
+      banana: { price: 200 },
+      durian: 100
+    };
+    
+    // 1. Merge object2 into object1
+    // 若 object1 有相同成員則被 object2 覆蓋 ( object2 為主 )
+    $.extend( object1, object2 );
+    
+    // 2. deep -> Type: Boolean, 預設為 false
+    // 設定為 true 時合併, 若 object3 有相同成員內的數值則被 object4 覆蓋 ( object4 為主 )
+    $.extend( true, object3, object4 )
+
+    // 3. 若想不修改原始資料, target 可放入空物件
+    var object5 = {};
+    // $.extend( object5, object3, object4 )
+    console.log(object5);
+    
+    
+    // Assuming JSON.stringify
+    $( "#log1" ).append( JSON.stringify( object1 ) );
+    $( "#log2" ).append( JSON.stringify( object3 ) );
+    $( "#log3" ).append( JSON.stringify( object3 ) );
+
+
+
+
+
+    // jQuery.fn.extend()
     $.fn.extend({
       benCheck: function() {
         return this.each(function() {
@@ -48,13 +99,10 @@
 
     $( "input[type='checkbox']" ).benCheck();
 
-
+    
     $.fn.benAdd = function(a,b){
       return a + b;
     }
-
-
-
   })
 
 </script>

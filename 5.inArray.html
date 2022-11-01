@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<style>
+  span {
+    color: red;
+  }
+</style>
+<body>
+  <h2><a href="https://api.jquery.com/jQuery.inArray/">jQuery.inArray()</a></h2>
+  <ul>
+    <li>功能： 函數用於在陣列中查找指定值，並返回它的索引值index （ 如果未滿足條件，則回傳 -1 ）。</li>
+    <li>語法： jQuery.inArray( value, array [, fromIndex ] )。</li>
+    <li>回傳值： Number。</li>
+    <li>參數： value 與 array 與 fromIndex ( Type: Number 指定索引位置開始查找, 預設值為 0, 第三參數可忽略 )</li>
+  </ul>
+
+  <div>"John" found at <span></span></div>
+  <div>4 found at <span></span></div>
+  <div>"Karl" not found, so <span></span></div>
+  <div>"Pete" is in the array, but not at or after index 2, so <span></span></div>
+
+</body>
+</html>
+
+<script>
+let data = [
+  {
+      name: "Ben充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tommy充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tiffany充電站",
+      Charge: "投幣式",
+      money: 15,
+  },
+  {
+      name: "Ted充電站",
+      Charge: "免費",
+      money: 1,
+  },
+  {
+      name: "Sharon充電站",
+      Charge: "投幣式",
+      money: 50,
+  },
+];
+let arrStr = [ "one", "two", "three", "four", "five" ];
+let arrNum = [1, 2, 3, 4, 5];
+let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+let person = {
+  name : ['Bob', 'Smith'],
+  age : 32,
+  gender : 'male',
+  interests : ['music', 'skiing'],
+  bio : function() {
+      alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  },
+  greeting: function() {
+      alert('Hi! I\'m ' + this.name[0] + '.');
+  }
+};
+
+
+var arr = [ 4, "Pete", 8, "John" ];
+var $spans = $( "span" );
+$spans.eq( 0 ).text( $.inArray( "John", arr ) );
+$spans.eq( 1 ).text( $.inArray( 4, arr ) );
+$spans.eq( 2 ).text( $.inArray( "Karl", arr ) );
+$spans.eq( 3 ).text( $.inArray( "Pete", arr, 2 ) );
+</script>

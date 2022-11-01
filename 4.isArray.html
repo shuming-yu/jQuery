@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h2><a href="https://api.jquery.com/jQuery.isArray/">jQuery.isArray()</a></h2>
+  <ul>
+    <li>功能： 函數用於判斷指定參數是否是一個陣列。</li>
+    <li>語法： $.isArray( object )。</li>
+    <li>回傳值： Boolean。</li>
+    <li>注意: 在jQuery 3.2 已棄用，請改用 Array.isArray()</li>
+  </ul>
+  
+  Is [] an Array? <b></b>
+</body>
+</html>
+
+<script>
+let data = [
+  {
+      name: "Ben充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tommy充電站",
+      Charge: "免費",
+      money: 0,
+  },
+  {
+      name: "Tiffany充電站",
+      Charge: "投幣式",
+      money: 15,
+  },
+  {
+      name: "Ted充電站",
+      Charge: "免費",
+      money: 1,
+  },
+  {
+      name: "Sharon充電站",
+      Charge: "投幣式",
+      money: 50,
+  },
+];
+let arrStr = [ "one", "two", "three", "four", "five" ];
+let arrNum = [1, 2, 3, 4, 5];
+let obj = { one: 1, two: 2, three: 3, four: 4, five: 5 };
+let person = {
+  name : ['Bob', 'Smith'],
+  age : 32,
+  gender : 'male',
+  interests : ['music', 'skiing'],
+  bio : function() {
+      alert(this.name[0] + ' ' + this.name[1] + ' is ' + this.age + ' years old. He likes ' + this.interests[0] + ' and ' + this.interests[1] + '.');
+  },
+  greeting: function() {
+      alert('Hi! I\'m ' + this.name[0] + '.');
+  }
+};
+
+// $.isArray(data)
+  $( "b" ).append( "" + $.isArray([]) );
+
+</script>

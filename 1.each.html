@@ -14,26 +14,34 @@
   }
 </style>
 <body>
-  <h2>jQuery.each() & .each()</h2>
+  <h2><a href="https://api.jquery.com/jQuery.each/">jQuery.each()</a></h2>
+  <ul>
+    <li>功能： 對陣列的每個元素執行一次提供的函數。</li>
+    <li>改變： 不會直接改變原陣列，但可能會依帶入的函式而改變。可使用 return 結束迴圈。</li>
+    <li>語法： jQuery.each( array, callback )。</li>
+    <li>語法： jQuery.each( object, callback )。</li>
+    <li>回傳值： 。</li>
+    <li>參數： ( array || object ) 與 callback 函式</li>
+  </ul>
 
-  <input type="button" id="Btn_Each" value="each" />
-  <!-- <input type="button" id="Btn_Grep" value="grep" />
-  <input type="button" id="Btn_Map" value="map" />
-  <input type="button" id="Btn_Merge" value="merge" />
-  <input type="button" id="Btn_Unique" value="unique" /> -->
-  <br />
+  <h2><a href="https://api.jquery.com/each/">.each()</a></h2>
+  <ul>
+    <li>語法： $( selector ).each( function )。</li>
+  </ul>
+
+  <input type="button" id="Btn_Each" value="each" /><br />
   
+  <fieldset>
+    <legend>output</legend>
+    <div id="msg"></div>
+  </fieldset>
+  <br>
+
   <div id="one"></div>
   <div id="two"></div>
   <div id="three"></div>
   <div id="four"></div>
   <div id="five"></div>
-
-  <br>
-  <fieldset>
-    <legend>output</legend>
-    <div id="msg"></div>
-  </fieldset>
   <br>
 
   To do list: <span>(click here to change)</span>
@@ -96,8 +104,7 @@ let person = {
     // $.each()
     $("#Btn_Each").click(function () {
 
-        // 1.
-        // 賦予值方式會回傳 arr 陣列
+        // 1. 賦予值方式會回傳 arr 陣列
         let arrEmpty = $.each(arrNum, function (index, val) {
 
         });

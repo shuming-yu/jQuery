@@ -9,21 +9,30 @@
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h2>jQuery.map() & .map()</h2>
+  <h2><a href="https://api.jquery.com/jQuery.map/">jQuery.map()</a></h2>
   <ul>
-    <li>透過函式內所回傳的值組合成回傳一個陣列</li>
-    <li>若輸出陣列想略過特定元素，就return null或undefined</li>
+    <li>功能： 透過函式內所回傳的值組合成回傳一個新陣列。</li>
+    <li>改變： 不會直接改變原陣列。若輸出陣列想略過特定元素，就 return null 或 undefined</li>
+    <li>語法： var newArray = jQuery.map( array, function )。</li>
+    <li>語法： var newArray = jQuery.map( object, function )。</li>
+    <li>回傳值： [] 空陣列。</li>
+    <li>參數： ( array || object ) 與 callback 函式</li>
+    <li>注意： 1. 在jQuery 1.6 之前，該函數只支持遍歷數組 $.map ；從1.6 開始，該函數也支持遍歷對象 .map()。</li>
   </ul>
 
-  <input type="button" id="Btn_Map" value="map" />
-  <br />
+  <h2><a href="https://api.jquery.com/map/">.map()</a></h2>
+  <ul>
+    <li>語法： $( selector ).map( function )</li>
+    <li>回傳值： jQuery 物件。</li>
+  </ul>
+
+  <input type="button" id="Btn_Map" value="map" /><br />
 
   <fieldset>
     <legend>output</legend>
     <div id="msg"></div>
   </fieldset>
-  <br>
-  <hr>
+  <br><hr>
 
   <form id="form">
     <p><b>Values: </b></p>
@@ -81,51 +90,57 @@ let person = {
 
 
   $(function(){
-    
+
     // $.map()
+    // 1. 若未 return, 也會回傳空陣列 []
+    let mapEmpty = $.map(arrNum, function(val, index){
+      // return 
+    });
+    // console.log("mapEmpty:", mapEmpty);
+
+
+    // 2. 陣列 return true || false
+    let mapTrue = $.map(arrNum, function(val, index){
+      // val++;
+      // console.log(val);
+      return val >= 3;
+      
+      // if(val >= 3){
+      //   return val;
+      // }else{
+      //   // return null || undefined
+      //   return false
+      // }
+    });
+    // console.log("arrNum:", arrNum);
+    // console.log("mapTrue:", mapTrue);
+
+
+    // 3. 物件
+    let mapObj = $.map(obj, function(val, key){
+      // val++;
+      // console.log(val);
+      return val * 2;
+    })
+    // console.log("obj:", obj);
+    // console.log("mapObj:", mapObj);
+
+    
     $("#Btn_Map").click(function () {
+      var arr2 = $.map(arrNum, function (val, index) {
+        return val * 2;
+      });
 
-        // 1.
-        // 若未 return, 也會回傳空陣列 []
-        let mapEmpty = $.map(arrNum, function(val, index){
-          // return 
-        });
-        console.log("mapEmpty:", mapEmpty);
-
-
-        // 2. 陣列 return true || false
-        let mapTrue = $.map(arrNum, function(val, index){
-          // return val >= 3;
-          
-          if(val >= 3){
-            return val;
-          }else{
-            return false
-          }
-        });
-        // console.log("mapTrue:", mapTrue);
-
-
-        // 3. 物件
-        let mapObj = $.map(obj, function(val, key){
-          // console.log(key);
-          return val * 2;
-        })
-        // console.log("mapObj:", mapObj);
-
-        
-        var arr2 = $.map(arrNum, function (val, index) {
-            return val * 2;
-        });
-
-        $("#msg").html("A: " + arrNum.join(", ") + "<br/>");
-        $("#msg").append("B: " + arr2.join(", ") + "<br/>");
+      $("#msg").html("A: " + arrNum.join(", ") + "<br/>");
+      $("#msg").append("B: " + arr2.join(", ") + "<br/>");
     });
 
 
 
     // .map()
-    $("#form p").append( $("input").map(function() {
+    $("#form p").append( $("input[type='text']").map(function(index, val) {
+      // console.log(index,val);
+      // console.log($(this));
       return $(this).val();
     })
     .get()

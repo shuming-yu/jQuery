@@ -6,11 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>=
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h2>jQuery.grep()</h2>
+  <h2><a href="https://api.jquery.com/jQuery.grep/">jQuery.grep()</a></h2>
+  <ul>
+    <li>功能： 經指定的函式運算後，由原陣列中通過該函式檢驗的元素回傳一個新陣列。</li>
+    <li>改變： 不會直接改變原陣列。</li>
+    <li>語法： var newArray = jQuery.grep( array, function [, invert ] )。</li>
+    <li>回傳值： [] 空陣列。</li>
+    <li>參數： array 與 callback 函式與 invert ( Type: Boolean, 預設為 false, 第三參數可忽略 )</li>
+  </ul>
 
+
+  <input type="button" id="Btn_Grep" value="grep" /><br />
+
+  <fieldset>
+    <legend>output</legend>
+    <div id="msg"></div>
+  </fieldset>
 </body>
 </html>
 
@@ -60,12 +74,42 @@ let person = {
 
   $(function(){
 
-    $.grep(arrStr, function(n, i){
-      console.log(n, i);
+    // 1.
+    let arrGrep = $.grep(arrNum, function(val, index){
+      // console.log("val:", val, "index:" , index);
+      return val >= 3;
+      // return val >= 8; // 未滿足條件則回傳 [] 空陣列
     })
+    // console.log("arrNum:", arrNum);
+    // console.log("arrGrep:", arrGrep);
+
+
+    // 2. invert -> true
+    let arrBoolean = $.grep(data, function(val, index){
+      return val.money > 10;
+    }, true)
+    // invert 預設為 false
+    // 若 invert 參數設定為 true, 則回傳所有為 false 的元素
+    console.log("arrBoolean:", arrBoolean);
 
 
 
+
+
+  $("#Btn_Grep").click(function () {
+    var arr1 = [1, 2, 3, 4, 5];
+    var arr2 = $.grep(arr1, function (val, index) {
+        return val * 2 == 4 ;
+    });
+    //最後那個true 是反轉的意思 就是將結果相反
+    var arr3 = $.grep(arr1, function (val, index) {
+        return index > 1;
+    }, true);
+
+    $("#msg").html("A: " + arr1.join(", ") + "<br/>");
+    $("#msg").append("B: " + arr2.join(", ") + "<br/>");
+    $("#msg").append("C: " + arr3.join(", ") + "<br/>");
+  });
   })
 
 

@@ -20,7 +20,7 @@
     <li>改變： 不會直接改變原陣列，但可能會依帶入的函式而改變。可使用 return 結束迴圈。</li>
     <li>語法： jQuery.each( array, callback )。</li>
     <li>語法： jQuery.each( object, callback )。</li>
-    <li>回傳值： 。</li>
+    <li>回傳值： jQuery。</li>
     <li>參數： ( array || object ) 與 callback 函式</li>
   </ul>
 
@@ -30,13 +30,14 @@
   </ul>
 
   <input type="button" id="Btn_Each" value="each" /><br />
-  
+
   <fieldset>
     <legend>output</legend>
     <div id="msg"></div>
   </fieldset>
   <br>
 
+  Demo return :
   <div id="one"></div>
   <div id="two"></div>
   <div id="three"></div>
@@ -44,8 +45,9 @@
   <div id="five"></div>
   <br>
 
+  Demo .each() : <br>
   To do list: <span>(click here to change)</span>
-  <ul>
+  <ul id="demoEach">
     <li>Eat</li>
     <li>Sleep</li>
     <li>Be merry</li>
@@ -108,33 +110,30 @@ let person = {
         let arrEmpty = $.each(arrNum, function (index, val) {
 
         });
-        console.log("arrEmpty:", arrEmpty);
+        // console.log("arrEmpty:", arrEmpty);
 
         
         // 2. 陣列 arrNum
-        let eachArrNum = $.each(arrNum, function (index, val) {
+        $.each(arrNum, function (index, val) {
             $("#msg").append("index:" + index + ", val:" + val + "<br/>");
             // console.log(index + ":" + val);
         });
-        // console.log("eachArrNum:", eachArrNum);
 
 
         // 3. 陣列 arrStr - return
-        let eachArrStr = $.each(arrStr, function (index, val) {
+        $.each(arrStr, function (index, val) {
           $( "#" + val ).text( "Mine is " + val + "." );
-
+          
           // Will stop running after "three"
           return ( val !== "three" );
         });
-        // console.log("eachArrStr:", eachArrStr);
 
 
         // 4. 物件
-        let eachObj = $.each(obj, function (key, val) {
+        $.each(obj, function (key, val) {
             $("#msg").append("key:" + key + ", value:" + val + "<br/>");
             // console.log(key + ":" + val);
         });
-        // console.log("eachObj:", eachObj);
 
     });
 
@@ -142,7 +141,7 @@ let person = {
 
     // .each() - 元素
     $("span").click(function(){
-      $("li").each(function(index, item){
+      $("#demoEach li").each(function(index, item){
         // console.log(index, item);
         // console.log(this);
 

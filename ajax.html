@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2><a href="https://api.jquery.com/jquery.ajax/#jQuery-ajax-url-settings">jQuery.ajax()</a></h2>
+  <div><strong>contentType</strong> 是一個用於指定要發送的資料的類型的屬性。它通常用於在 AJAX 請求中設定請求的內容類型，以告訴伺服器所發送的資料的格式。</div>
+  <ul>
+    <li>1.application/x-www-form-urlencoded：這是預設的 contentType。當使用這種類型時，資料會被格式化為 URL 編碼的字串，並且以鍵值對的形式傳送。這是在 HTML 表單中常見的資料傳遞格式。</li>
+    <br>
+    <li>2.multipart/form-data：這種類型通常用於上傳檔案時。資料會被分割為多個部分，並以一個專門用於上傳檔案的標準格式進行傳送。</li>
+    <br>
+    <li>3.application/octet-stream：這個類型的資料不做任何假設，也不進行任何特殊的處理。它被視為一個不具有特定格式或結構的原始二進位資料流。通常，當下載檔案時，如果伺服器端沒有指定正確的內容類型，瀏覽器會將檔案視為 "application/octet-stream"，並提示用戶下載檔案而不是直接顯示或解析該資料。</li>
+    <br>
+    <li>4.application/json：當資料以 JSON 格式進行傳送時，可以使用這種類型。資料會被序列化為 JSON 字串，並以該格式傳送給伺服器。</li>
+    <br>
+    <li>5.application/xml：如果要傳送 XML 格式的資料，則可以使用這種類型。資料會以 XML 的形式傳送給伺服器。</li>
+    <br>
+    <li>6.text/plain：使用這種類型時，資料會以純文字形式傳送，並且不進行任何額外的格式化。這在需要傳送純文字內容的情況下很有用。</li>
+  </ul>
+
+  <div><strong>async (default: true)</strong> 用於表示一個函式是異步的（asynchronous）</div>
+  <ul>
+    <li>異步（asynchronous）的意思是，在函式執行期間，程式碼可以繼續往下執行而不必等待該函式完成。這種方式可以提高網頁的響應性，避免使用者介面的凍結或阻塞。</li>
+    <br>
+    <li>可以使用 async 關鍵字來定義異步函式。異步函式可以包含使用 AJAX 的程式碼，以及其他需要在 AJAX 請求完成之後執行的程式碼。</li>
+  </ul>
+
+</body>
+</html>
